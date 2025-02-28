@@ -35,6 +35,7 @@ namespace Oculus.Interaction.OVR.Input
         public bool Active => checkVelocity();
 
         private bool checkVelocity() {
+            Debug.Log("Entered Check Velocity");
             if (!OVRInput.Get(_button)) {
                 return false;
             }
@@ -43,10 +44,13 @@ namespace Oculus.Interaction.OVR.Input
             Vector3 velocity = OVRInput.GetLocalControllerVelocity(OVRInput.Controller.RTouch);
             // Vector3 velocity = OVRInput.GetLocalControllerVelocity(controller);
             float magnitude = velocity.magnitude;
+            Debug.Log("Passed trigger test. Magnitude = " + magnitude);
 
             if (magnitude < 0.5) {
                 return false;
             }
+
+            Debug.Log("Passed magnitude test");
 
             return true;
 
