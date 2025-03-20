@@ -25,40 +25,48 @@ using UnityEngine;
 namespace Oculus.Interaction.OVR.Input
 {
     // [Feature(Feature.Interaction)]
-    public class OVRButtonActiveState : MonoBehaviour, IActiveState
+    public class MyActiveState : MonoBehaviour, IActiveState
     {
         [SerializeField]
         private OVRInput.Button _button;
         public OVRInput.Controller controller;
+        public GameObject inGameController;
+
 
         // public bool Active => OVRInput.Get(_button);
-        public bool Active => checkVelocity();
+        public bool Swing => checkVelocity();
+        public bool Active => OVRInput.Get(_button);
 
         private bool checkVelocity() {
-            Debug.Log("Entered Check Velocity");
             if (!OVRInput.Get(_button)) {
                 return false;
             }
 
-            // Over what amount of time?
-            Vector3 velocity = OVRInput.GetLocalControllerVelocity(OVRInput.Controller.RTouch);
-            // Vector3 velocity = OVRInput.GetLocalControllerVelocity(controller);
-            float magnitude = velocity.magnitude;
-            Debug.Log("Passed trigger test. Magnitude = " + magnitude);
+            Debug.DrawLine(OVRInput.GetLocalControllerPosition(controller), OVRInput.GetLocalControllerRotation(controller) * (OVRInput.GetLocalControllerPosition(controller) * 10), Color.red);
 
-            if (magnitude < 0.5) {
+            Vector3 velocity = OVRInput.GetLocalControllerVelocity(controller);
+            float magnitude = velocity.magnitude;
+            // Debug.Log("Passed trigger test. Magnitude = " + magnitude);
+
+            if (magnitude < 1.0) {
                 return false;
             }
 
-            Debug.Log("Passed magnitude test");
+            // Debug.Log(Vector3.Dot(inGameController.transform.forward, velocity));
+            // Debug.Log(inGameController.transform.forward);
+
+            // Quaternion times vector
+            
+
+            // Debug.Log("Passed magnitude test");
+
+            if (Vector3.Dot(inGameController.transform.forward, velocity) < 0.0) return false;
+            // forward vector is incorrect
 
             return true;
 
         }
     }
-
-
-    // Change OVRInput.Get(_button); with my own script checking
 
     
 }
