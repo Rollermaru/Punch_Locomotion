@@ -15441,7 +15441,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _broadcasters:
   - {fileID: 1906622996}
-  - {fileID: 40980011}
   _handler: {fileID: 1097875162}
 --- !u!1 &1555592773
 GameObject:
@@ -17574,7 +17573,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _broadcasters:
-  - {fileID: 1736524625}
   - {fileID: 189927909}
   _handler: {fileID: 1097875162}
 --- !u!1 &1792756947
@@ -21081,7 +21079,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2137342697
 Transform:
   m_ObjectHideFlags: 0
