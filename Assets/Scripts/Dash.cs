@@ -7,14 +7,25 @@ public class Dash : MonoBehaviour
     public float dashDistance = 5f;      // How far the character will dash
     public float dashDuration = 0.2f;    // How long the dash takes (in seconds)
 
-    private bool isDashing;              // Tracks whether a dash is currently in progress
+    public Transform playerOrigin;      // Object to be moved
+    // public Transform playerHead;
+    public ActivateTP punched;          // Reference to a boolean that tells us to activate the punch
+    public Transform floorPosition;     // Need to know floor position to not go through it
+
+    public bool isDashing;              // Tracks whether a dash is currently in progress
     private Vector3 startPos, endPos;    // Dash start and target positions
     private float timer;                 // Keeps track of time since the dash started
+
+
+    void Start()
+    {
+        isDashing = false;
+    }
 
     void Update()
     {
         // Detect if the Space key was pressed this frame
-        if (Keyboard.current.spaceKey.wasPressedThisFrame && !isDashing)
+        if (punched.activatePunch && !isDashing)
         {
             StartDash();  // Begin dash movement
         }
@@ -24,7 +35,7 @@ public class Dash : MonoBehaviour
         {
             timer += Time.deltaTime;
             float t = timer / dashDuration;  // Normalized time (0 to 1)
-            transform.position = Vector3.Lerp(startPos, endPos, t);  // Smooth movement
+            playerOrigin.position = Vector3.Lerp(startPos, endPos, t);  // Smooth movement
 
             // End the dash once the duration is complete
             if (t >= 1f)
@@ -40,7 +51,12 @@ public class Dash : MonoBehaviour
     {
         isDashing = true;
         timer = 0f;
-        startPos = transform.position;
-        endPos = startPos + transform.forward * dashDistance;  // Dash in the forward direction
+        startPos = playerOrigin.position;
+        endPos = startPos + punched.punch_direction * dashDistance;  // Dash in the forward direction
+
+        if (endPos.y < floorPosition.position.y) {
+            endPos = new Vector3(endPos.x, floorPosition.position.y, endPos.z);
+        }
+
     }
 }

@@ -10,3 +10,5 @@
 24	2252	7642134369386787	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	a293239c6403ca6d
 1	2443	7642134371228363	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	4a6cf0a7231988eb
 2443	2581	7642134372760331	C:/Users/ninja/Unity_Projects/Punch_Locomotion/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/2l1pa5j6/obj/arm64-v8a/libgame.so	cb70e3d3b388b4bb
+36	1822	7666177602532707	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	cd0b0891617ada7e
+1823	5234	7666177636971264	C:/Users/ninja/Unity_Projects/Punch_Locomotion/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/2l1pa5j6/obj/arm64-v8a/libswappywrapper.so	4d35bf717fc7fb9d
