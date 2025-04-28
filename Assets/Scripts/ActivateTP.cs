@@ -9,14 +9,15 @@ using UnityEngine;
 // Use the public bool activatePunch to initiate teleportation within dash script
 public class ActivateTP : MonoBehaviour
 {
-    [SerializeField] private int frames = 72;
+    [SerializeField] private int frames = 24;
     [SerializeField] private float dist_threshold = 0.3f;   // maybe 0.5 meters?
-    private Queue<Vector3> controller_positions;    // Punch activated by comparing first in queue to current position
+    public Queue<Vector3> controller_positions;    // Punch activated by comparing first in queue to current position
     public bool activatePunch;      // For other scripts to know that it's time to move
 
     public Vector3 punch_direction; // to tell direction of punch for dashing in punch_direction's direction
 
     public Dash dasher; // To get isDashing boolean to stop checking while moving
+    private Transform savedPosition;
 
     void Start()
     {
@@ -27,12 +28,13 @@ public class ActivateTP : MonoBehaviour
     {
         if (dasher.isDashing) return;   // Don't do checks whilst dashing
 
-        AddPoint(transform);
-        activatePunch = CheckPunch(transform);
+        savedPosition = transform;
+        AddPoint(savedPosition);
+        activatePunch = CheckPunch(savedPosition);
 
         if (activatePunch) {
             Debug.Log("PUNCH!!!!");
-            punch_direction = Vector3.Normalize(transform.position - controller_positions.Peek()); // then - now
+            punch_direction = Vector3.Normalize(savedPosition.position - controller_positions.Peek()); // then - now
             controller_positions.Clear();   // O(n)
         }
 
@@ -54,7 +56,7 @@ public class ActivateTP : MonoBehaviour
         Vector3 then = controller_positions.Peek();
         Vector3 now = trans.position;
 
-        if (now.magnitude - then.magnitude > dist_threshold) {
+        if (Mathf.Abs((now - then).magnitude) > dist_threshold) {
             return true;
         }
 
@@ -75,5 +77,14 @@ public class ActivateTP : MonoBehaviour
         }
 
         controller_positions.Enqueue(trans.position);   // Also O(1) if queue has space
+    }
+
+    public Vector3[] GetPoints() {
+        Vector3[] points = {Vector3.zero, Vector3.zero};
+        if (controller_positions.Count > 0) {
+            points = new Vector3[] {controller_positions.Peek(), savedPosition.position};
+        }
+
+        return points;
     }
 }

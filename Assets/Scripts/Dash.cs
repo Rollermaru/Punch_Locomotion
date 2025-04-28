@@ -22,9 +22,8 @@ public class Dash : MonoBehaviour
         isDashing = false;
     }
 
-    void Update()
+    void LateUpdate()
     {
-        // Detect if the Space key was pressed this frame
         if (punched.activatePunch && !isDashing)
         {
             StartDash();  // Begin dash movement
@@ -52,7 +51,7 @@ public class Dash : MonoBehaviour
         isDashing = true;
         timer = 0f;
         startPos = playerOrigin.position;
-        endPos = startPos + punched.punch_direction * dashDistance;  // Dash in the forward direction
+        endPos = startPos + punched.punch_direction * dashDistance;  // Dash in the punch direction
 
         if (endPos.y < floorPosition.position.y) {
             endPos = new Vector3(endPos.x, floorPosition.position.y, endPos.z);
