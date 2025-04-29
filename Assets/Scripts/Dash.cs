@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Dash : MonoBehaviour
 {
@@ -27,6 +26,7 @@ public class Dash : MonoBehaviour
         if (punched.activatePunch && !isDashing)
         {
             StartDash();  // Begin dash movement
+            punched.activatePunch = false;
         }
 
         // If currently dashing, update the character's position using linear interpolation
@@ -48,14 +48,16 @@ public class Dash : MonoBehaviour
     // target position, and resetting the timer.
     void StartDash()
     {
+        //DataLogger.LogTeleportStart();
+
         isDashing = true;
         timer = 0f;
         startPos = playerOrigin.position;
         endPos = startPos + punched.punch_direction * dashDistance;  // Dash in the punch direction
 
         if (endPos.y < floorPosition.position.y) {
-            endPos = new Vector3(endPos.x, floorPosition.position.y, endPos.z);
+            endPos.y = floorPosition.position.y;
         }
-
+        
     }
 }

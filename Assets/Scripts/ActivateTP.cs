@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using Oculus.Interaction;
 using Unity.VisualScripting;
 using UnityEngine;
+using Unity.Logging;
 
 // Place within a controller of your choosing
 // Use the public bool activatePunch to initiate teleportation within dash script
 public class ActivateTP : MonoBehaviour
 {
+    [Header("Punch Detection")]
     [SerializeField] private int frames = 24;
     [SerializeField] private float dist_threshold = 0.3f;   // maybe 0.5 meters?
     public Queue<Vector3> controller_positions;    // Punch activated by comparing first in queue to current position
@@ -19,26 +21,55 @@ public class ActivateTP : MonoBehaviour
     public Dash dasher; // To get isDashing boolean to stop checking while moving
     private Transform savedPosition;
 
+    [Header("Flag Proximity")]
+    [SerializeField] private Transform[] flags;
+
+    private bool[] hasLoggedFlag;
+
+
+
     void Start()
     {
         controller_positions = new Queue<Vector3>(frames);
+        hasLoggedFlag = new bool[flags.Length];
     }
 
     void Update()
     {
-        if (dasher.isDashing) return;   // Don't do checks whilst dashing
+        // First handle punch detection
+        if (!dasher.isDashing)
+        {
+            savedPosition = transform;
+            AddPoint(savedPosition);
+            activatePunch = CheckPunch(savedPosition);
 
-        savedPosition = transform;
-        AddPoint(savedPosition);
-        activatePunch = CheckPunch(savedPosition);
-
-        if (activatePunch) {
-            Debug.Log("PUNCH!!!!");
-            punch_direction = Vector3.Normalize(savedPosition.position - controller_positions.Peek()); // then - now
-            controller_positions.Clear();   // O(n)
+            if (activatePunch)
+            {
+                punch_direction = Vector3.Normalize( savedPosition.position - controller_positions.Peek());
+                controller_positions.Clear();
+                Debug.Log("PUNCH!!!!");
+            }
         }
 
-        
+        // If dashing is happening, Dash.cs will call DataLogger.LogTeleportStart()
+        // So here, we only handle "flag hit" detection logic
+        for (int i = 0; i < flags.Length; i++)
+        {
+            if (hasLoggedFlag[i]) continue;
+
+            float d = Vector3.Distance(transform.position, flags[i].position);
+
+            if (d <= 5f)  // Within a 5-meter radius
+            {
+                hasLoggedFlag[i] = true;
+
+                // Log the event
+                DataLogger.LogFlagHit(flags[i].name, flags[i].position,transform.position);
+
+                Debug.Log($"[Distance] Flag '{flags[i].name}' hit at t={Time.time:F2}, d={d:F2}");
+            }
+        }
+
     }
 
     /*
@@ -56,11 +87,7 @@ public class ActivateTP : MonoBehaviour
         Vector3 then = controller_positions.Peek();
         Vector3 now = trans.position;
 
-        if (Mathf.Abs((now - then).magnitude) > dist_threshold) {
-            return true;
-        }
-
-        return false;
+        return (now - then).magnitude > dist_threshold;
     }
 
     /*

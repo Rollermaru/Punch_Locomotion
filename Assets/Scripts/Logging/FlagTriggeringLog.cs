@@ -1,15 +1,19 @@
 using UnityEngine;
-using Unity.Logging;
 
 [RequireComponent(typeof(Collider))]
-public class FlagTriggeringLog : MonoBehaviour
+public class FlagTrigger : MonoBehaviour
 {
-    void OnTriggerEnter(Collider other)
+    private bool hasLogged = false;  // Ensure logging happens only once
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("RightHandAnchor"))
+        // If the collider that entered is your hand
+        if (!hasLogged && other.gameObject.name.Contains("RightHandAnchor"))
         {
-            Log.Info("RightHandAnchor triggered flag: {0}", gameObject.name);
-            GetComponent<Collider>().enabled = false;
+            hasLogged = true;
+            // Call DataLogger to record the event
+            DataLogger.LogFlagHit(gameObject.name, transform.position, other.transform.position );
+            Debug.Log($"[Trigger] Flag '{name}' hit at time={Time.time:F2}");
         }
     }
 }
