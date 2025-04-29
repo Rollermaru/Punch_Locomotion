@@ -12534,10 +12534,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frames: 24
-  dist_threshold: 0.15
+  dist_threshold: 0.3
   activatePunch: 0
   punch_direction: {x: 0, y: 0, z: 0}
   dasher: {fileID: 1849177880}
+  floorPosition: {fileID: 1631658868}
 --- !u!1 &2126298339
 GameObject:
   m_ObjectHideFlags: 0
