@@ -48,16 +48,22 @@ public class Dash : MonoBehaviour
     // target position, and resetting the timer.
     void StartDash()
     {
-        //DataLogger.LogTeleportStart();
+        // Get current trial number from FlagManager
+        FlagManager flagManager = FindObjectOfType<FlagManager>();
+        int currentTrial = flagManager.CurrentTrialNumber;
+
+        // Log teleport start with trial number
+        DataLogger.LogTeleportStart(currentTrial);
 
         isDashing = true;
         timer = 0f;
         startPos = playerOrigin.position;
         endPos = startPos + punched.punch_direction * dashDistance;  // Dash in the punch direction
 
-        if (endPos.y < floorPosition.position.y) {
+        if (endPos.y < floorPosition.position.y)
+        {
             endPos.y = floorPosition.position.y;
         }
-        
     }
+
 }
