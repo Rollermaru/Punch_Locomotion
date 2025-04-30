@@ -19,6 +19,9 @@ public class FlagManager : MonoBehaviour
     // Public accessor for current trial number
     public int CurrentTrialNumber { get { return currentTrialNumber; } }
 
+    // For data logging new trial
+    public event System.Action OnTrialStarted;
+
     public Transform PlayerTransform
     {
         get { return playerTransform; }
@@ -144,6 +147,9 @@ public class FlagManager : MonoBehaviour
 
         // Mark this trial as in progress
         trialInProgress = true;
+
+        OnTrialStarted?.Invoke();
+        Debug.Log($"Trial {currentTrialNumber} started - observers notified");
     }
 
     // Called by FlagTrigger when flag is reached

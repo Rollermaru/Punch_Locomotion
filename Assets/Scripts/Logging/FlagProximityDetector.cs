@@ -17,16 +17,29 @@ public class FlagProximityDetector : MonoBehaviour
 
     private void Update()
     {
+        if (hasTriggered || !gameObject.activeInHierarchy) return;
 
+        // Sphere cast for more accurate distance checking
+        if (Physics.CheckSphere(transform.position, detectionRadius, playerLayer))
+        {
+            HandleFlagTriggered();
+        }
     }
     private void OnTriggerStay(Collider other)
     {
-        // Only register information once a dash finishes
-        // And also if we're working in the dash scene
-        if (dasher != null) {
-            if (dasher.isDashing) return; 
-        }
-        
+        // Skip if already triggered or if dash is in progress
+        if (hasTriggered || !gameObject.activeInHierarchy) return;
+
+        // Check if it's the hand or the camera rig
+        bool isHand = other.name.Contains("RightHandAnchor");
+        bool isPlayer = other.gameObject.layer == LayerMask.NameToLayer("Player") || 
+            other.name.Contains("HandAnchor") || other.transform.root.name.Contains("Camera");
+
+        if (!isHand && !isPlayer) return;
+
+        // Skip if still dashing
+        if (dasher != null && dasher.isDashing) return;
+
         HandleFlagTriggered();
     }
 
@@ -49,5 +62,4 @@ public class FlagProximityDetector : MonoBehaviour
         // Disable the flag
         gameObject.SetActive(false);
     }
-
 }

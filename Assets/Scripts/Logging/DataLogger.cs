@@ -2,12 +2,16 @@ using System;
 using System.IO;
 using UnityEngine;
 
-public static class DataLogger 
+public static class DataLogger
 {
     private static readonly string csvPath;
     private static bool hasStartedFirstTeleport = false;
     private static float teleportStartTime = 0f;
-    // private static bool experimentInProgress = false;
+    private static bool experimentInProgress = false;
+
+    private static bool timerRunning = false;
+    private static float trialStartTime = 0f;
+
 
     static DataLogger()
     {
@@ -24,7 +28,7 @@ public static class DataLogger
         // If the file does not exist, write the header first
         if (!File.Exists(csvPath))
         {
-            var header = "Trial,Event,Time,FlagName,Distance,TimeSinceTeleport\n";
+            var header = "Trial,Event,Time,Flag Name,Distance,Time Taken\n";
             File.WriteAllText(csvPath, header);
         }
 
@@ -32,19 +36,34 @@ public static class DataLogger
     }
 
     // Call this when starting a new trial
-    // public static void StartExperiment()
-    // {
-    //     if (!experimentInProgress)
-    //     {
-    //         experimentInProgress = true;
-    //         Debug.Log("[DataLogger] Experiment started");
-    //     }
-    // }
+    public static void StartExperiment()
+    {
+        if (!experimentInProgress)
+        {
+            experimentInProgress = true;
+            Debug.Log("[DataLogger] Experiment started");
+        }
+    }
+
+    // Call this when first punch is detected
+    public static void StartTimer(int trialNumber)
+    {
+        timerRunning = true;
+        trialStartTime = Time.time;
+
+        Debug.Log("---- TIMER STARTED! ----");
+
+        // Log the start event
+        var line = $"{trialNumber},PunchStart,{Time.time},,,0\n";
+        File.AppendAllText(csvPath, line);
+
+        Debug.Log($"[DataLogger] Trial {trialNumber}: Timer started at {trialStartTime}");
+    }
 
     public static void LogTeleportStart(int trialNumber)
     {
         // Only start timing on the first punch ever
-        if (!hasStartedFirstTeleport)
+        if (experimentInProgress && !hasStartedFirstTeleport)
         {
             hasStartedFirstTeleport = true;
             teleportStartTime = Time.time;
@@ -63,12 +82,7 @@ public static class DataLogger
         float dist = Vector3.Distance(flagPos, handPos);
 
         // Calculate time since first teleport
-        float timeSinceTeleport = 0f;
-        if (hasStartedFirstTeleport)
-        {
-            timeSinceTeleport = Time.time - teleportStartTime;
-            Debug.Log("TIME IT TOOK: " + timeSinceTeleport);
-        }
+        float timeTaken = timerRunning ? Time.time - trialStartTime : 0f;
         // Output event, time, flag name, distance, and time since teleport
         var line = string.Format(
             "{0},FlagHit,{1},{2},{3:F2},{4:F2}\n",
@@ -76,19 +90,19 @@ public static class DataLogger
             Time.time,
             flagName,
             dist,
-            timeSinceTeleport
+            timeTaken
         );
         File.AppendAllText(csvPath, line);
 
-        Debug.Log($"[DataLogger] Trial {trialNumber}: Flag '{flagName}' hit, distance: {dist:F2}m, time: {timeSinceTeleport:F2}s");
+        Debug.Log($"[DataLogger] Trial {trialNumber}: Flag '{flagName}' hit, distance: {dist:F2}m, time: {timeTaken:F2}s");
     }
 
     // Reset for next trial
     public static void ResetForNextTrial()
     {
-        hasStartedFirstTeleport = false;
-        teleportStartTime = 0f;
-        Debug.Log("[DataLogger] Reset for next trial");
+        timerRunning = false;
+        trialStartTime = 0f;
+        Debug.Log("[DataLogger] Timer reset for next trial");
     }
 
 }

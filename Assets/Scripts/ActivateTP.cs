@@ -1,10 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Oculus.Interaction;
-using Unity.VisualScripting;
 using UnityEngine;
-using Unity.Logging;
 
 // Place within a controller of your choosing
 // Use the public bool activatePunch to initiate teleportation within dash script
@@ -23,6 +18,11 @@ public class ActivateTP : MonoBehaviour
     private Transform savedPosition;
     public Transform floorPosition;
 
+    //When a punch is detected, for logging use
+    public event System.Action OnFirstPunch;
+    private bool hasPunchedThisTrial = false;
+    private bool readyToDetect = false;
+
     void Start()
     {
         controller_positions = new Queue<Vector3>(frames);
@@ -34,17 +34,20 @@ public class ActivateTP : MonoBehaviour
         // First handle punch detection
         if (dasher.isDashing) return;   // Don't do checks while dashing
         if (gameObject.transform.position.y < floorPosition.position.y) return; // Don't do checks under surface
-        
+
         savedPosition = transform;
         AddPoint(savedPosition);
         activatePunch = CheckPunch(savedPosition);
 
         if (activatePunch)
         {
-            punch_direction = Vector3.Normalize( savedPosition.position - controller_positions.Peek());
+            punch_direction = Vector3.Normalize(savedPosition.position - controller_positions.Peek());
             controller_positions.Clear();
             controllerPositionsLocal.Clear();
             Debug.Log("PUNCH!!!!");
+
+            hasPunchedThisTrial = true;
+            OnFirstPunch?.Invoke(); // Fire the event 
         }
 
     }
@@ -57,7 +60,7 @@ public class ActivateTP : MonoBehaviour
     *               Transformation of object at current frame
     *   @return true if distance >= dist_threshold (as given above)  
     */
-    private bool CheckPunch(Transform trans) 
+    private bool CheckPunch(Transform trans)
     {
         if (controller_positions.Count <= 0) return false;
         if (controllerPositionsLocal.Count <= 0) return false;
@@ -75,17 +78,25 @@ public class ActivateTP : MonoBehaviour
     *   @params trans
     *               Transformation of object at current frame
     */
-    private void AddPoint(Transform trans) 
+    private void AddPoint(Transform trans)
     {
-        if (controller_positions.Count >= frames - 1) {
+        if (controller_positions.Count >= frames - 1)
+        {
             controller_positions.Dequeue(); // O(1)?
         }
 
-        if (controllerPositionsLocal.Count >= frames - 1) {
+        if (controllerPositionsLocal.Count >= frames - 1)
+        {
             controllerPositionsLocal.Dequeue();
         }
 
         controller_positions.Enqueue(trans.position);   // Also O(1) if queue has space
         controllerPositionsLocal.Enqueue(trans.localPosition);
+    }
+
+    // Call this at the start of every trial from the punch trial manager to reset
+    public void ResetPunchFlag()
+    {
+        hasPunchedThisTrial = false;
     }
 }
