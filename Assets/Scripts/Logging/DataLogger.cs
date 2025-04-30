@@ -2,12 +2,12 @@ using System;
 using System.IO;
 using UnityEngine;
 
-public static class DataLogger
+public static class DataLogger 
 {
     private static readonly string csvPath;
     private static bool hasStartedFirstTeleport = false;
     private static float teleportStartTime = 0f;
-    private static bool experimentInProgress = false;
+    // private static bool experimentInProgress = false;
 
     static DataLogger()
     {
@@ -32,19 +32,19 @@ public static class DataLogger
     }
 
     // Call this when starting a new trial
-    public static void StartExperiment()
-    {
-        if (!experimentInProgress)
-        {
-            experimentInProgress = true;
-            Debug.Log("[DataLogger] Experiment started");
-        }
-    }
+    // public static void StartExperiment()
+    // {
+    //     if (!experimentInProgress)
+    //     {
+    //         experimentInProgress = true;
+    //         Debug.Log("[DataLogger] Experiment started");
+    //     }
+    // }
 
     public static void LogTeleportStart(int trialNumber)
     {
         // Only start timing on the first punch ever
-        if (experimentInProgress && !hasStartedFirstTeleport)
+        if (!hasStartedFirstTeleport)
         {
             hasStartedFirstTeleport = true;
             teleportStartTime = Time.time;
@@ -67,6 +67,7 @@ public static class DataLogger
         if (hasStartedFirstTeleport)
         {
             timeSinceTeleport = Time.time - teleportStartTime;
+            Debug.Log("TIME IT TOOK: " + timeSinceTeleport);
         }
         // Output event, time, flag name, distance, and time since teleport
         var line = string.Format(

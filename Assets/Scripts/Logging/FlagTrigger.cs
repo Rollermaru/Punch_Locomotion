@@ -23,7 +23,7 @@ public class FlagTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Make sure we're only registering the hit once
-        if (!hasTriggered && other.gameObject.name.Contains("RightHandAnchor"))
+        if (!hasTriggered)
         {
             hasTriggered = true;
 

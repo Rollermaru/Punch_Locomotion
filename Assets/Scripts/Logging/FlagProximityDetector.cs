@@ -5,6 +5,7 @@ public class FlagProximityDetector : MonoBehaviour
 {
     [SerializeField] private float detectionRadius = 5f;
     [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private Dash dasher;
 
     private FlagManager flagManager;
     private bool hasTriggered;
@@ -12,18 +13,21 @@ public class FlagProximityDetector : MonoBehaviour
     private void Start()
     {
         flagManager = FindObjectOfType<FlagManager>();
-        GetComponent<Collider>().isTrigger = true;
     }
 
     private void Update()
     {
-        if (hasTriggered || !gameObject.activeInHierarchy) return;
 
-        // Sphere cast for more accurate distance checking
-        if (Physics.CheckSphere(transform.position, detectionRadius, playerLayer))
-        {
-            HandleFlagTriggered();
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        // Only register information once a dash finishes
+        // And also if we're working in the dash scene
+        if (dasher != null) {
+            if (dasher.isDashing) return; 
         }
+        
+        HandleFlagTriggered();
     }
 
     private void HandleFlagTriggered()
@@ -46,9 +50,4 @@ public class FlagProximityDetector : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position, detectionRadius);
-    }
 }

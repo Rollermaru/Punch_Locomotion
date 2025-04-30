@@ -88,13 +88,4 @@ public class ActivateTP : MonoBehaviour
         controller_positions.Enqueue(trans.position);   // Also O(1) if queue has space
         controllerPositionsLocal.Enqueue(trans.localPosition);
     }
-
-    public Vector3[] GetPoints() {
-        Vector3[] points = {Vector3.zero, Vector3.zero};
-        if (controller_positions.Count > 0) {
-            points = new Vector3[] {controller_positions.Peek(), savedPosition.position};
-        }
-
-        return points;
-    }
 }

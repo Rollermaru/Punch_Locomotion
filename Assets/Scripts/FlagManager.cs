@@ -190,7 +190,7 @@ public class FlagManager : MonoBehaviour
         if (playerTransform != null && playerSpawnPoint != null)
         {
             playerTransform.position = playerSpawnPoint.position;
-            playerTransform.rotation = playerSpawnPoint.rotation;
+            // playerTransform.rotation = playerSpawnPoint.rotation;
             Debug.Log("Player teleported to spawn point");
         }
         else
