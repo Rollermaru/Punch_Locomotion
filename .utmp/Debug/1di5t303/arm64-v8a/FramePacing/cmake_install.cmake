@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/ninja/Unity_Projects/Punch_Locomotion/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/FramePacing
+# Install script for directory: C:/Users/ninja/Unity_Projects/Punch_Locomotion/Library/PramData/AndroidApplicationController/Cache/com.DefaultCompany.Punch_Locomotion/gradle-project/unityLibrary/src/main/cpp/FramePacing
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
