@@ -48,13 +48,6 @@ public class Dash : MonoBehaviour
     // target position, and resetting the timer.
     void StartDash()
     {
-        // Get current trial number from FlagManager
-        FlagManager flagManager = FindObjectOfType<FlagManager>();
-        int currentTrial = flagManager.CurrentTrialNumber;
-
-        // Log teleport start with trial number
-        DataLogger.LogTeleportStart(currentTrial);
-
         isDashing = true;
         timer = 0f;
         startPos = playerOrigin.position;

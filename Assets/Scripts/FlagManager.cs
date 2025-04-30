@@ -19,6 +19,11 @@ public class FlagManager : MonoBehaviour
     // Public accessor for current trial number
     public int CurrentTrialNumber { get { return currentTrialNumber; } }
 
+    public Transform PlayerTransform
+    {
+        get { return playerTransform; }
+    }
+
     void Start()
     {
         // Initialize the flagUsed array
