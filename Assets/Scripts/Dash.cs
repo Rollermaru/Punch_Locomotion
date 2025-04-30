@@ -14,6 +14,7 @@ public class Dash : MonoBehaviour
     public bool isDashing;              // Tracks whether a dash is currently in progress
     private Vector3 startPos, endPos;    // Dash start and target positions
     private float timer;                 // Keeps track of time since the dash started
+    [SerializeField] private FlagManager flagManager;
 
 
     void Start()
@@ -49,7 +50,6 @@ public class Dash : MonoBehaviour
     void StartDash()
     {
         // Get current trial number from FlagManager
-        FlagManager flagManager = FindObjectOfType<FlagManager>();
         int currentTrial = flagManager.CurrentTrialNumber;
 
         // Log teleport start with trial number

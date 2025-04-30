@@ -44,8 +44,10 @@ public static class DataLogger
     public static void LogTeleportStart(int trialNumber)
     {
         // Only start timing on the first punch ever
+        Debug.Log("Log Teleport Start called");
         if (experimentInProgress && !hasStartedFirstTeleport)
         {
+            Debug.Log("START LOGGING TIME");
             hasStartedFirstTeleport = true;
             teleportStartTime = Time.time;
 

@@ -47,6 +47,10 @@ public class ActivateTP : MonoBehaviour
 
     void Update()
     {
+        // Null checks
+        if (dasher == null) return;
+        
+
         // First handle punch detection
         if (dasher.isDashing) return;   // Don't do checks while dashing
         if (gameObject.transform.position.y < floorPosition.position.y) return; // Don't do checks under surface
@@ -66,33 +70,33 @@ public class ActivateTP : MonoBehaviour
 
         // If dashing is happening, Dash.cs will call DataLogger.LogTeleportStart()
         // So here, we only handle "flag hit" detection logic
-        for (int i = 0; i < flags.Length; i++)
-        {
-            // Skip if already logged or if the flag is inactive
-            if (hasLoggedFlag[i] || !flags[i].gameObject.activeInHierarchy) continue;
+        // for (int i = 0; i < flags.Length; i++)
+        // {
+        //     // Skip if already logged or if the flag is inactive
+        //     if (hasLoggedFlag[i] || !flags[i].gameObject.activeInHierarchy) continue;
 
-            float d = Vector3.Distance(transform.position, flags[i].position);
+        //     float d = Vector3.Distance(transform.position, flags[i].position);
 
-            if (d <= 5f)  // Within a 5-meter radius
-            {
-                hasLoggedFlag[i] = true;
+        //     if (d <= 5f)  // Within a 5-meter radius
+        //     {
+        //         hasLoggedFlag[i] = true;
 
-                // Get the current trial number from FlagManager
-                int currentTrial = 0;
-                if (flagManager != null)
-                {
-                    currentTrial = flagManager.CurrentTrialNumber;
-                }
+        //         // Get the current trial number from FlagManager
+        //         int currentTrial = 0;
+        //         if (flagManager != null)
+        //         {
+        //             currentTrial = flagManager.CurrentTrialNumber;
+        //         }
 
-                // Log the event with the trial number
-                DataLogger.LogFlagHit(currentTrial, flags[i].name, flags[i].position, transform.position);
+        //         // Log the event with the trial number
+        //         DataLogger.LogFlagHit(currentTrial, flags[i].name, flags[i].position, transform.position);
 
-                Debug.Log($"[Distance] Flag '{flags[i].name}' hit at t={Time.time:F2}, d={d:F2}, Trial={currentTrial}");
+        //         Debug.Log($"[Distance] Flag '{flags[i].name}' hit at t={Time.time:F2}, d={d:F2}, Trial={currentTrial}");
 
-                if (flagManager != null)
-                    flagManager.FlagReached(flags[i].gameObject);
-            }
-        }
+        //         if (flagManager != null)
+        //             flagManager.FlagReached(flags[i].gameObject);
+        //     }
+        // }
 
     }
 
@@ -134,14 +138,5 @@ public class ActivateTP : MonoBehaviour
 
         controller_positions.Enqueue(trans.position);   // Also O(1) if queue has space
         controllerPositionsLocal.Enqueue(trans.localPosition);
-    }
-
-    public Vector3[] GetPoints() {
-        Vector3[] points = {Vector3.zero, Vector3.zero};
-        if (controller_positions.Count > 0) {
-            points = new Vector3[] {controller_positions.Peek(), savedPosition.position};
-        }
-
-        return points;
     }
 }
