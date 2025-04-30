@@ -10835,6 +10835,7 @@ Transform:
   - {fileID: 1027081375}
   - {fileID: 2063802918}
   - {fileID: 431595543}
+  - {fileID: 1962442870}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &998579852
@@ -11731,7 +11732,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flagManager: {fileID: 2063802919}
-  TPLogger: {fileID: 0}
+  TPLogger: {fileID: 1962442871}
   SceneManagementer: {fileID: 431595542}
 --- !u!1 &1040111900
 GameObject:
@@ -20506,6 +20507,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 745554534}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1962442869
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1962442870}
+  - component: {fileID: 1962442871}
+  m_Layer: 0
+  m_Name: TPLogging
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1962442870
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1962442869}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 994157549}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1962442871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1962442869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3435987f51fe08488f4a8402b2d699d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeState: {fileID: 872683863}
+  flagManager: {fileID: 2063802919}
 --- !u!1 &1971049390
 GameObject:
   m_ObjectHideFlags: 0

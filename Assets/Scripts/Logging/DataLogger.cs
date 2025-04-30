@@ -46,18 +46,16 @@ public static class DataLogger
     }
 
     // Call this when first punch is detected
-    public static void StartTimer(int trialNumber)
+    public static void StartTimer(int trialNumber, string eventType = "PunchStart")
     {
         timerRunning = true;
         trialStartTime = Time.time;
 
-        Debug.Log("---- TIMER STARTED! ----");
-
-        // Log the start event
-        var line = $"{trialNumber},PunchStart,{Time.time},,,0\n";
+        // Log the start event with the appropriate event type
+        var line = $"{trialNumber},{eventType},{Time.time},,,0\n";
         File.AppendAllText(csvPath, line);
 
-        Debug.Log($"[DataLogger] Trial {trialNumber}: Timer started at {trialStartTime}");
+        Debug.Log($"[DataLogger] Trial {trialNumber}: {eventType} logged at {trialStartTime}");
     }
 
     public static void LogTeleportStart(int trialNumber)
