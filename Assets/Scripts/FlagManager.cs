@@ -50,7 +50,16 @@ public class FlagManager : MonoBehaviour
         }
 
         // Start first trial
-        StartNextTrial();
+        // Only increment trial if this is the first time
+        if (currentTrialNumber == 0)
+        {
+            StartNextTrial();
+        }
+        else
+        {
+            // Just set up existing trial without incrementing
+            SetupCurrentTrial();
+        }
     }
 
     // Called from EditorController when spacebar is pressed
@@ -86,6 +95,74 @@ public class FlagManager : MonoBehaviour
 
     // Made public so EditorController can access it
     public void StartNextTrial()
+    {
+        // Reset DataLogger for new trial
+        DataLogger.ResetForNextTrial();
+
+        // Disable all flags first
+        foreach (GameObject flag in flagObjects)
+        {
+            flag.SetActive(false);
+
+            // Also disable colliders
+            Collider[] colliders = flag.GetComponentsInChildren<Collider>();
+            foreach (Collider c in colliders)
+            {
+                c.enabled = false;
+            }
+        }
+
+        // Increment trial number ONLY ONCE
+        currentTrialNumber++;
+        Debug.Log($"Starting Trial #{currentTrialNumber}");
+
+        // Create a list of available flags that haven't been used
+        List<int> availableFlags = new List<int>();
+        for (int i = 0; i < flagObjects.Length; i++)
+        {
+            if (!flagUsed[i])
+            {
+                availableFlags.Add(i);
+            }
+        }
+
+        // Debug to see what's available
+        Debug.Log($"Available flags: {string.Join(", ", availableFlags)}");
+
+        // Check if we have any flags left
+        if (availableFlags.Count == 0)
+        {
+            Debug.Log("All flags have been used. Experiment complete!");
+            experimentComplete = true;
+            return;
+        }
+
+        // Pick a random available flag
+        int randomIndex = Random.Range(0, availableFlags.Count);
+        int nextFlagIndex = availableFlags[randomIndex];
+        currentFlagIndex = nextFlagIndex;
+
+        // Activate only this flag
+        flagObjects[nextFlagIndex].SetActive(true);
+
+        // Enable colliders for the active flag
+        Collider[] newFlagColliders = flagObjects[nextFlagIndex].GetComponentsInChildren<Collider>();
+        foreach (Collider c in newFlagColliders)
+        {
+            c.enabled = true;
+        }
+
+        Debug.Log($"Trial {currentTrialNumber}: Flag #{nextFlagIndex} activated");
+
+        // Mark this trial as in progress
+        trialInProgress = true;
+
+        OnTrialStarted?.Invoke();
+        Debug.Log($"Trial {currentTrialNumber} started - observers notified");
+    }
+
+    // To separate trial number increment from setup
+    public void SetupCurrentTrial()
     {
         // Reset DataLogger for new trial
         DataLogger.ResetForNextTrial();
