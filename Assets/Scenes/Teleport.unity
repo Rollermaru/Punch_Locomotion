@@ -6283,6 +6283,7 @@ GameObject:
   - component: {fileID: 556276565}
   - component: {fileID: 556276564}
   - component: {fileID: 556276563}
+  - component: {fileID: 556276568}
   m_Layer: 0
   m_Name: '[BuildingBlock] Camera Rig'
   m_TagString: Untagged
@@ -6447,6 +6448,29 @@ Transform:
   - {fileID: 836376136}
   m_Father: {fileID: 1971049391}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!136 &556276568
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556276562}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.02
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &560454076
 GameObject:
   m_ObjectHideFlags: 0
@@ -9184,8 +9208,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 836376136}
-  - component: {fileID: 836376138}
-  - component: {fileID: 836376137}
   m_Layer: 0
   m_Name: Physics
   m_TagString: Untagged
@@ -9208,56 +9230,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 556276567}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &836376137
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 836376135}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
---- !u!136 &836376138
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 836376135}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: -0.5, z: 0}
 --- !u!1 &848581068
 GameObject:
   m_ObjectHideFlags: 0
@@ -11685,6 +11657,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flagManager: {fileID: 2063802919}
+  TPLogger: {fileID: 0}
 --- !u!1 &1040111900
 GameObject:
   m_ObjectHideFlags: 0
