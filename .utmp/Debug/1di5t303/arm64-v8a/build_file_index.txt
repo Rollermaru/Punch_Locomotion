@@ -1,3 +1,3 @@
-C:\Users\ninja\Unity_Projects\Punch_Locomotion\Library\PramData\AndroidApplicationController\Cache\com.DefaultCompany.Punch_Locomotion\gradle-project\unityLibrary\src\main\cpp\CMakeLists.txt
-C:\Users\ninja\Unity_Projects\Punch_Locomotion\Library\PramData\AndroidApplicationController\Cache\com.DefaultCompany.Punch_Locomotion\gradle-project\unityLibrary\src\main\cpp\FramePacing\CMakeLists.txt
-C:\Users\ninja\Unity_Projects\Punch_Locomotion\Library\PramData\AndroidApplicationController\Cache\com.DefaultCompany.Punch_Locomotion\gradle-project\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt
+C:\Users\ninja\Unity_Projects\Punch_Locomotion\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+C:\Users\ninja\Unity_Projects\Punch_Locomotion\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\FramePacing\CMakeLists.txt
+C:\Users\ninja\Unity_Projects\Punch_Locomotion\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt

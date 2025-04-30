@@ -95,14 +95,14 @@
 				{
 					"directoryIndex" : 1,
 					"id" : "game::@d02bb112ea9f9c2ed29f",
-					"jsonFile" : "target-game-Debug-9e8005c2c00bb5775277.json",
+					"jsonFile" : "target-game-Debug-37aaf2b136996ac8f370.json",
 					"name" : "game",
 					"projectIndex" : 1
 				},
 				{
 					"directoryIndex" : 2,
 					"id" : "swappywrapper::@7e25bd1f32ce224db4e9",
-					"jsonFile" : "target-swappywrapper-Debug-fa1d562c85e373f7c83a.json",
+					"jsonFile" : "target-swappywrapper-Debug-88e76a8158ebc5460296.json",
 					"name" : "swappywrapper",
 					"projectIndex" : 2
 				}
@@ -113,7 +113,7 @@
 	"paths" : 
 	{
 		"build" : "C:/Users/ninja/Unity_Projects/Punch_Locomotion/.utmp/Debug/1di5t303/arm64-v8a",
-		"source" : "C:/Users/ninja/Unity_Projects/Punch_Locomotion/Library/PramData/AndroidApplicationController/Cache/com.DefaultCompany.Punch_Locomotion/gradle-project/unityLibrary/src/main/cpp"
+		"source" : "C:/Users/ninja/Unity_Projects/Punch_Locomotion/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp"
 	},
 	"version" : 
 	{

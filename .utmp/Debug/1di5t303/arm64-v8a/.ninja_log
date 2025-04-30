@@ -1,12 +1,12 @@
 # ninja log v5
-54	286	7676919835840241	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	2173283c5ef3b880
-289	574	7676919838672546	C:/Users/ninja/Unity_Projects/Punch_Locomotion/Library/PramData/AndroidApplicationController/Cache/com.DefaultCompany.Punch_Locomotion/gradle-project/unityLibrary/build/intermediates/cxx/Debug/1di5t303/obj/arm64-v8a/libswappywrapper.so	1f49bf307a1ce5b8
-13	1804	7676919850745803	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	237bec8cd0adad79
-17	1810	7676919850695855	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	90b6428fdeb7dd44
-23	1813	7676919850680665	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	1914592bff2cd0b8
-38	1854	7676919851237855	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	d88c7e2466d79c01
-47	1858	7676919851355887	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	e73e5751800c97ad
-8	1933	7676919852141404	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	be115d18cfc8357c
-30	2110	7676919853959687	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	b9b6a1707616f80a
-1	2212	7676919854898984	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	ceef3a0fb4f2f12e
-2212	2493	7676919857688658	C:/Users/ninja/Unity_Projects/Punch_Locomotion/Library/PramData/AndroidApplicationController/Cache/com.DefaultCompany.Punch_Locomotion/gradle-project/unityLibrary/build/intermediates/cxx/Debug/1di5t303/obj/arm64-v8a/libgame.so	b6e9a79e4cc0d0dc
+53	300	7677296371972014	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	4d0d98bdf9d6cdba
+303	526	7677296374185635	C:/Users/ninja/Unity_Projects/Punch_Locomotion/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/1di5t303/obj/arm64-v8a/libswappywrapper.so	912719dfc5eb31b5
+18	1388	7677296382716681	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	4194942adc3155be
+6	1394	7677296382849223	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	59c1032d12fa22a
+39	1411	7677296382945461	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	4c53ef9b325fa2ea
+45	1448	7677296383338241	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	cd54cd5838921fc6
+14	1516	7677296384079539	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	14475cdb75fe5012
+26	1534	7677296384226505	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	c44cbd173f2e9c27
+32	1600	7677296384929609	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	8d04bb2bc838bd8f
+1	1680	7677296385710468	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	bf404eaf3f36fb4c
+1681	1834	7677296387292426	C:/Users/ninja/Unity_Projects/Punch_Locomotion/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/1di5t303/obj/arm64-v8a/libgame.so	5074f3a8b32a6fdc

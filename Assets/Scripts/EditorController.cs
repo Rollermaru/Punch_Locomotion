@@ -5,11 +5,13 @@ public class EditorController : MonoBehaviour
 {
     public FlagManager flagManager;
     public TPLogging TPLogger;
+    public ManageScene SceneManagementer;   // weird name because "SceneManager" already exists
 
     void Update()
     {
-        // This will only be processed by the computer running Unity
         OVRInput.Update();
+
+        // Restart for next trial
         if (Input.GetKeyDown(KeyCode.Space) || OVRInput.Get(OVRInput.Button.Four))
         {
             Debug.Log("Spacebar pressed by experimenter - moving to next trial");
@@ -28,6 +30,17 @@ public class EditorController : MonoBehaviour
             }
             else {
                 Debug.Log("Not doing the TP trial, right?");
+            }
+        }
+
+        // Load next scene
+        
+        if (Input.GetKeyDown(KeyCode.Backspace) || OVRInput.Get(OVRInput.Button.Start)) {
+            Debug.Log("Load?");
+            if (SceneManagementer != null) {
+                Debug.Log("Next Scene");
+                SceneManagementer.GoToNextScene();
+
             }
         }
     }

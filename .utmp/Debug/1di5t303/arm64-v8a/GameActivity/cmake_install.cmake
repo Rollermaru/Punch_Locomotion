@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/ninja/Unity_Projects/Punch_Locomotion/Library/PramData/AndroidApplicationController/Cache/com.DefaultCompany.Punch_Locomotion/gradle-project/unityLibrary/src/main/cpp/GameActivity
+# Install script for directory: C:/Users/ninja/Unity_Projects/Punch_Locomotion/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
